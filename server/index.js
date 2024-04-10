@@ -1,9 +1,14 @@
 const express = require('express');
+const result = require('dotenv').config();
 
-const cors = require('./middleware/corsMiddleware')
+const { cors } = require('./middlewares/corsMiddleware');
+const { auth } = require('./middlewares/authMiddleware');
+const { dbConnect } = require('./config/databaseConfig');
 
 const app = express();
-const port = 3030;
+const port = process.env.PORT;
+
+dbConnect();
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
